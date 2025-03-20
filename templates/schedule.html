@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChronoAni</title>
+    <style>
+        table { border-collapse: collapse; width: 50%; margin: 20px auto; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Anime Schedule</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Day</th>
+            <th>Time</th>
+        </tr>
+        {% for anime in schedule %}
+        <tr>
+            <td>{{ anime.title }}</td>
+            <td>{{ anime.day }}</td>
+            <td>{{ anime.time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
