@@ -101,3 +101,40 @@
     </div>
 </body>
 </html>
+    <script>
+        // Load dark mode preference on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+    <style>
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/static/rm218-bb-07.jpg');
+            color: #ddd;
+        }
+        body.dark-mode nav {
+            background-color: rgba(20, 20, 20, 0.9);
+        }
+        body.dark-mode nav h1 {
+            color: #ff7878;
+        }
+        body.dark-mode nav ul li a {
+            color: #ddd;
+        }
+        body.dark-mode nav ul li a:hover {
+            color: #ff7878;
+        }
+        body.dark-mode .schedule-container {
+            background-color: rgba(30, 30, 30, 0.8);
+        }
+        body.dark-mode .schedule-table th {
+            background-color: #555;
+        }
+        body.dark-mode .schedule-table td {
+            border: 1px solid #555;
+        }
+    </style>

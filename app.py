@@ -47,7 +47,7 @@ def get_newly_added_media(media_type="ANIME", limit=5):
 def home():
     # Fetch newly added anime (you can change to "MANGA" if preferred)
     new_media = get_newly_added_media(media_type="ANIME", limit=5)
-    return render_template('home.html', news=new_media)  # Using 'news' for now, can rename later
+    return render_template('home.html', news=new_media)  
 
 @app.route('/schedule')
 def schedule():
@@ -55,7 +55,7 @@ def schedule():
 
 @app.route('/about')
 def about():
-    return "<h1>About ChronoAni</h1><p>This is a placeholder for the About page.</p>"
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
