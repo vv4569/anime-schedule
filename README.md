@@ -35,7 +35,7 @@ Follow these steps to set up and run ChronoAni locally.
    git clone https://github.com/your_username/anime-schedule.git
    cd anime-schedule
 2. **Set Up a Virtual Environment (Optional but Recommended)**
-   ``` python3 -m venv venv
+       python3 -m venv venv
        source venv/bin/activate
 3. **Install Dependencies**
     ``` pip install flask requests ```
@@ -48,19 +48,19 @@ Follow these steps to set up and run ChronoAni locally.
     ├── schedule.html
     └── about.html
 5. **Run the Application**
-   ``` python3 app.py   
+      python3 app.py   
    
 ## Usage
 
 *Home Page (/):*
 - Displays a welcome message and a list of newly added anime fetched from AniList.
 - Includes a "View Schedule" button to navigate to the schedule page.
-- 
+  
 *Schedule Page (/schedule):*
 - Shows the current day (e.g., "Today is March 20, 2025").
 - Features a date picker to select a day and view its airing schedule.
 - Displays the schedule with anime titles, episode numbers, and airing times (in UTC).
-- 
+  
 *About Page (/about):*
 - Provides information about ChronoAni and a contact email.
   
