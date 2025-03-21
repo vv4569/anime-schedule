@@ -40,14 +40,15 @@ Follow these steps to set up and run ChronoAni locally.
 3. **Install Dependencies**
     ``` pip install flask requests ```
 4. **Confirm the Project Structure**
-├── app.py
-├── static/
-│   └── rm218-bb-07.jpg  # Background image (download or replace with your own)
-└── templates/
-    ├── home.html
-    ├── schedule.html
-    └── about.html
-5. **Run the Application**
+   ```bash
+   ├── app.py
+   ├── static/
+   │   └── rm218-bb-07.jpg  # Background image (download or replace with your own)
+   └── templates/
+       ├── home.html
+       ├── schedule.html
+       └── about.html
+6. **Run the Application**
       python3 app.py   
    
 ## Usage
