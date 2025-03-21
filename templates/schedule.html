@@ -3,114 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <title>ChronoAni - Schedule</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Anime+Ace&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             background-image: url('/static/rm218-bb-07.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            margin: 0;
-            height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
+            background-attachment: fixed;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
             color: #fff;
+            overflow-x: hidden;
         }
         nav {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
         nav h1 {
-            float: left;
+            font-family: 'Anime Ace', sans-serif;
             font-weight: bold;
-            color: #fff;
+            color: #ff4d4d;
             text-shadow: 2px 2px 4px #000;
-            margin: 0;
-            padding: 14px 16px;
         }
         nav ul {
-            float: right;
             list-style-type: none;
-            margin: 0;
-            padding: 0;
+            display: flex;
         }
         nav ul li {
-            float: left;
+            margin: 0 10px;
         }
         nav ul li a {
-            display: block;
             color: #fff;
-            padding: 14px 16px;
+            padding: 10px 20px;
             text-decoration: none;
             text-shadow: 1px 1px 2px #000;
+            transition: background 0.3s, color 0.3s;
         }
         nav ul li a:hover {
             background-color: rgba(255, 255, 255, 0.2);
+            color: #ff4d4d;
+            border-radius: 5px;
+        }
+        .dark-mode-toggle {
+            display: flex;
+            align-items: center;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(45deg, #ccc, #aaa);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .toggle-knob {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: #fff;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .toggle-labels {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .toggle-labels .sun-icon {
+            margin-left: 5px;
+        }
+        .toggle-labels .moon-icon {
+            margin-right: 5px;
         }
         .schedule-container {
             width: 80%;
-            margin: 20px auto;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-in-out;
         }
-        .schedule-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .schedule-container h2 {
+            font-family: 'Anime Ace', sans-serif;
+            color: #ff4d4d;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px #000;
         }
-        .schedule-table th, .schedule-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+        .schedule-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: transform 0.3s, background 0.3s;
         }
-        .schedule-table th {
-            background-color: #333;
+        .schedule-item:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
         }
-    </style>
-</head>
-<body>
-    <nav>
-        <h1>ChronoAni</h1>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/schedule">Schedule</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
-    </nav>
-    <div class="schedule-container">
-        <h2>Anime Schedule</h2>
-        <table class="schedule-table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Day</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in schedule %}
-                <tr>
-                    <td>{{ item.title }}</td>
-                    <td>{{ item.day }}</td>
-                    <td>{{ item.time }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
-    <script>
-        // Load dark mode preference on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const isDarkMode = localStorage.getItem('darkMode') === 'true';
-            if (isDarkMode) {
-                document.body.classList.add('dark-mode');
-            }
-        });
-    </script>
-    <style>
+        .schedule-item h4 {
+            margin: 0;
+            color: #ff4d4d;
+            font-family: 'Anime Ace', sans-serif;
+        }
+        .schedule-item p {
+            margin: 5px 0;
+            color: #ddd;
+            font-size: 0.9em;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
         /* Dark Mode Styles */
         body.dark-mode {
             background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/static/rm218-bb-07.jpg');
@@ -128,13 +156,104 @@
         body.dark-mode nav ul li a:hover {
             color: #ff7878;
         }
+        body.dark-mode .toggle-switch {
+            background: linear-gradient(45deg, #555, #333);
+        }
+        body.dark-mode .toggle-knob {
+            transform: translateX(30px);
+        }
         body.dark-mode .schedule-container {
-            background-color: rgba(30, 30, 30, 0.8);
+            background: rgba(30, 30, 30, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        body.dark-mode .schedule-table th {
-            background-color: #555;
+        body.dark-mode .schedule-container h2 {
+            color: #ff7878;
         }
-        body.dark-mode .schedule-table td {
-            border: 1px solid #555;
+        body.dark-mode .schedule-item {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        body.dark-mode .schedule-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        body.dark-mode .schedule-item h4 {
+            color: #ff7878;
+        }
+        body.dark-mode .schedule-item p {
+            color: #bbb;
         }
     </style>
+</head>
+<body>
+    <nav>
+        <h1>ChronoAni</h1>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('schedule') }}">Schedule</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+        <div class="dark-mode-toggle">
+            <div class="toggle-switch" onclick="toggleDarkMode()">
+                <div class="toggle-knob"></div>
+                <div class="toggle-labels">
+                    <span class="sun-icon"><i class="fas fa-sun"></i></span>
+                    <span class="moon-icon"><i class="fas fa-moon"></i></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="schedule-container">
+        <h2>Anime Schedule - March 20, 2025</h2>
+        {% if schedule %}
+            {% for item in schedule %}
+            <div class="schedule-item">
+                <h4>{{ item.title }}</h4>
+                <p>
+                    <small>
+                        Episode: {{ item.episode }} | 
+                        Airing Time: {{ item.time }}
+                    </small>
+                </p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No anime scheduled for this day.</p>
+        {% endif %}
+    </div>
+    <script>
+        // Load dark mode preference on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+            updateTogglePosition(isDarkMode);
+        });
+
+        // Toggle dark mode
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            updateTogglePosition(isDarkMode);
+        }
+
+        // Update toggle switch position
+        function updateTogglePosition(isDarkMode) {
+            const knob = document.querySelector('.toggle-knob');
+            if (isDarkMode) {
+                knob.style.transform = 'translateX(30px)';
+            } else {
+                knob.style.transform = 'translateX(0)';
+            }
+        }
+
+        // Add interactivity for schedule items
+        document.querySelectorAll('.schedule-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.style.background = 'rgba(255, 77, 77, 0.2)';
+            });
+        });
+    </script>
+</body>
+</html>
