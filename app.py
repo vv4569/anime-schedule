@@ -5,13 +5,6 @@ from datetime import datetime, timezone
 
 app = Flask(__name__)
 
-# Dummy anime schedule data (unchanged)
-anime_schedule = [
-    {"title": "Demon Slayer", "day": "Monday", "time": "20:00"},
-    {"title": "One Piece", "day": "Sunday", "time": "09:30"},
-    {"title": "My Hero Academia", "day": "Saturday", "time": "17:30"},
-]
-
 # Function to fetch newly added anime/manga from AniList
 def get_newly_added_media(media_type="ANIME", limit=5):
     query = """
