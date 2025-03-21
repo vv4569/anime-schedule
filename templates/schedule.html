@@ -2,28 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ChronoAni</title>
+    <title>ChronoAni - Schedule</title>
     <style>
-        table { border-collapse: collapse; width: 50%; margin: 20px auto; }
-        th, td { border: 1px solid black; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        body {
+            background-image: url('/static/rm218-bb-07.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #fff;
+        }
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            overflow: hidden;
+        }
+        nav h1 {
+            float: left;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+            margin: 0;
+            padding: 14px 16px;
+        }
+        nav ul {
+            float: right;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            float: left;
+        }
+        nav ul li a {
+            display: block;
+            color: #fff;
+            padding: 14px 16px;
+            text-decoration: none;
+            text-shadow: 1px 1px 2px #000;
+        }
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .schedule-container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .schedule-table th, .schedule-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .schedule-table th {
+            background-color: #333;
+        }
     </style>
 </head>
 <body>
-    <h1>Anime Schedule</h1>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Day</th>
-            <th>Time</th>
-        </tr>
-        {% for anime in schedule %}
-        <tr>
-            <td>{{ anime.title }}</td>
-            <td>{{ anime.day }}</td>
-            <td>{{ anime.time }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <nav>
+        <h1>ChronoAni</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/schedule">Schedule</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+    <div class="schedule-container">
+        <h2>Anime Schedule</h2>
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in schedule %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.day }}</td>
+                    <td>{{ item.time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

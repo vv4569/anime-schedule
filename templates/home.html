@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChronoAni - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Anime+Ace&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-image: url('/static/rm218-bb-07.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        nav {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        nav h1 {
+            font-family: 'Anime Ace', sans-serif;
+            font-weight: bold;
+            color: #ff4d4d;
+            text-shadow: 2px 2px 4px #000;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+        nav ul li a {
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-shadow: 1px 1px 2px #000;
+            transition: background 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ff4d4d;
+            border-radius: 5px;
+        }
+        .navbar-buttons {
+            display: flex;
+        }
+
+        .navbar-buttons button {
+            margin-left: 10px;
+        }
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            text-shadow: 2px 2px 4px #000;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .hero h2 {
+            font-family: 'Anime Ace', sans-serif;
+            font-size: 3em;
+            margin: 0;
+            color: #ff4d4d;
+        }
+        .hero p {
+            font-size: 1.3em;
+            margin: 10px 0;
+        }
+        .hero button {
+            background: linear-gradient(45deg, #ff4d4d, #ff7878);
+            border: none;
+            padding: 12px 30px;
+            color: #fff;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .hero button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 77, 77, 0.6);
+        }
+        .new-media-box {
+            width: 60%;
+            max-height: 400px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+            animation: slideUp 1s ease-in-out;
+        }
+        .new-media-box::-webkit-scrollbar {
+            width: 8px;
+        }
+        .new-media-box::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        .new-media-box::-webkit-scrollbar-thumb {
+            background: #ff4d4d;
+            border-radius: 10px;
+        }
+        .new-media-box h3 {
+            margin-top: 0;
+            color: #fff;
+            font-family: 'Anime Ace', sans-serif;
+            text-shadow: 1px 1px 2px #000;
+        }
+        .media-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .media-item:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .media-item h4 {
+            margin: 0;
+            color: #ff4d4d;
+            font-family: 'Anime Ace', sans-serif;
+        }
+        .media-item p {
+            margin: 5px 0;
+            color: #ddd;
+            font-size: 0.9em;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>ChronoAni</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/schedule">Schedule</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+        <div class="dark-mode-toggle" onclick="toggleDarkMode()">
+            <div class="toggle-switch">
+                <div class="toggle-knob"></div>
+                <div class="toggle-labels">
+                    <span class="sun-icon"><i class="fas fa-sun"></i></span>
+                    <span class="moon-icon"><i class="fas fa-moon"></i></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="hero">
+        <h2>Welcome to ChronoAni</h2>
+        <p>Your Anime Timekeeper – Never miss an episode!</p>
+        <a href="/schedule"><button>View Schedule</button></a>
+    </div>
+    <div class="new-media-box">
+        <h3>Newly Added Anime</h3>
+        {% for item in news %}
+        <div class="media-item">
+            <h4>{{ item.title.english or item.title.romaji }}</h4>
+            <p>
+                <small>
+                    Added ID: {{ item.id }} | 
+                    Start Date: 
+                    {% if item.startDate.year %}
+                        {{ item.startDate.year }}-{{ item.startDate.month|default('??', true) }}-{{ item.startDate.day|default('??', true) }}
+                    {% else %}
+                        Unknown
+                    {% endif %}
+                </small>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        // Add interactivity (optional)
+        document.querySelectorAll('.media-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.style.background = 'rgba(255, 77, 77, 0.2)';
+            });
+        });
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
+            updateTogglePosition(isDarkMode);
+        }
+    </script>
+</body>
+
+</html>
