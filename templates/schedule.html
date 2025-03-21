@@ -111,8 +111,50 @@
         .schedule-container h2 {
             font-family: 'Anime Ace', sans-serif;
             color: #ff4d4d;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-shadow: 1px 1px 2px #000;
+        }
+        .schedule-container p.current-day {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+        .date-picker {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .date-picker label {
+            font-family: 'Anime Ace', sans-serif;
+            font-size: 1.2em;
+            color: #ff4d4d;
+            text-shadow: 1px 1px 2px #000;
+            margin-right: 10px;
+        }
+        .date-picker input[type="date"] {
+            padding: 8px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        .date-picker input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+        .date-picker button {
+            background: linear-gradient(45deg, #ff4d4d, #ff7878);
+            border: none;
+            padding: 8px 20px;
+            color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .date-picker button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
         }
         .schedule-item {
             background: rgba(255, 255, 255, 0.05);
@@ -169,6 +211,22 @@
         body.dark-mode .schedule-container h2 {
             color: #ff7878;
         }
+        body.dark-mode .schedule-container p.current-day {
+            color: #bbb;
+        }
+        body.dark-mode .date-picker label {
+            color: #ff7878;
+        }
+        body.dark-mode .date-picker input[type="date"] {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ddd;
+        }
+        body.dark-mode .date-picker button {
+            background: linear-gradient(45deg, #ff7878, #ff4d4d);
+        }
+        body.dark-mode .date-picker button:hover {
+            box-shadow: 0 5px 15px rgba(255, 120, 120, 0.4);
+        }
         body.dark-mode .schedule-item {
             background: rgba(255, 255, 255, 0.03);
         }
@@ -202,7 +260,16 @@
         </div>
     </nav>
     <div class="schedule-container">
-        <h2>Anime Schedule - March 20, 2025</h2>
+        <h2>Anime Schedule</h2>
+        <p class="current-day">Today is {{ current_day }}.</p>
+        <div class="date-picker">
+            <form method="POST" action="{{ url_for('schedule') }}">
+                <label for="schedule_date">Choose a day to view the airing schedule:</label>
+                <input type="date" id="schedule_date" name="schedule_date" value="{{ selected_date }}">
+                <button type="submit">View Schedule</button>
+            </form>
+        </div>
+        <h3>Schedule for {{ selected_date_display }}</h3>
         {% if schedule %}
             {% for item in schedule %}
             <div class="schedule-item">

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 import time
 from datetime import datetime, timezone
@@ -52,7 +52,7 @@ def home():
     return render_template('home.html', news=new_media)  
 
 # Function to fetch airing schedule for a specific day
-def get_airing_schedule(date_str="2025-03-20"):
+def get_airing_schedule(date_str):
     # Convert the date to a timestamp range (start and end of the day in UTC)
     target_date = datetime.strptime(date_str, "%Y-%m-%d")
     start_time = int(target_date.replace(hour=0, minute=0, second=0, tzinfo=timezone.utc).timestamp())
@@ -95,11 +95,23 @@ def get_airing_schedule(date_str="2025-03-20"):
         return formatted_schedule
     return []
 
-@app.route('/schedule')
+@app.route('/schedule', methods=['GET', 'POST'])
 def schedule():
-    # Fetch the airing schedule for March 20, 2025
-    anime_schedule = get_airing_schedule(date_str="2025-03-20")
-    return render_template('schedule.html', schedule=anime_schedule)
+    current_day = datetime.today().strftime("%Y-%m-%d")
+    current_day_display = datetime.strptime(current_day, "%Y-%m-%d").strftime("%B %d, %Y") 
+
+    # Get the selected date from the form (if submitted), otherwise default to current day
+    selected_date = request.form.get('schedule_date', current_day)
+
+    # Fetch the airing schedule for the selected date
+    anime_schedule = get_airing_schedule(date_str=selected_date)
+    selected_date_display = datetime.strptime(selected_date, "%Y-%m-%d").strftime("%B %d, %Y")
+
+    return render_template('schedule.html', 
+                          schedule=anime_schedule, 
+                          current_day=current_day_display, 
+                          selected_date=selected_date, 
+                          selected_date_display=selected_date_display)
 
 @app.route('/about')
 def about():
