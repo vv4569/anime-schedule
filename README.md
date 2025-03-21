@@ -1,7 +1,7 @@
 # ChronoAni - Your Anime Timekeeper
 
 ![ChronoAni Screenshot](https://github.com/vv4569/anime-schedule/blob/main/Screenshot%202025-03-21%20162242.png?raw=true)  
-*Screenshot of the ChronoAni homepage (replace with an actual screenshot if available).*
+*Screenshot of the ChronoAni homepage 
 
 ChronoAni is a simple, anime-themed website built with Flask that helps anime enthusiasts keep track of airing schedules, discover newly added anime, and engage with a community. It fetches real-time data from the [AniList API](https://anilist.gitbook.io/anilist-apiv2-docs/) to display airing schedules and newly added anime, offering a sleek, modern UI with light/dark mode support.
 
